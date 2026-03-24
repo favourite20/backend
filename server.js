@@ -3,6 +3,9 @@ const express = require("express");
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.get("/send", (req, res) => {
+    res.send('backend is working')
+});
 app.post("/send", async (req, res) => {
   const { Name, Subject, Email, Message } = req.body;
   const contactMail = nodemail.createTransport({
