@@ -6,6 +6,8 @@ app.use(express.json());
 app.post("/send", async (req, res) => {
   const { Name, Subject, Email, Message } = req.body;
   const contactMail = nodemail.createTransport({
+    host: "smtp.gmail.com",
+    secure: true,
     service: "gmail",
     port: "550",
     auth: {
