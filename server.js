@@ -8,8 +8,7 @@ app.post("/send", async (req, res) => {
   const contactMail = nodemail.createTransport({
     host: "smtp.gmail.com",
     secure: true,
-    service: "gmail",
-    port: "550",
+    port: 465,
     auth: {
       user: process.env.USER,
       pass: process.env.APP_PASS,
