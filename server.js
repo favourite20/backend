@@ -3,9 +3,6 @@ const express = require("express");
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.get("/send", async (req, res) => {
-    res.send('backend is working')
-});
 app.post("/send", async (req, res) => {
   const { Name, Subject, Email, Message } = req.body;
   const contactMail = nodemail.createTransport({
@@ -35,6 +32,9 @@ app.post("/send", async (req, res) => {
     <a href="portfolio.html">go back</a>
     </body>
     `);
+});
+app.get("/send", async (req, res) => {
+    res.send('backend is working')
 });
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("server is running"));
