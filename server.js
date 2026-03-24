@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.get("/send", (req, res) => {
+app.get("/send", async (req, res) => {
     res.send('backend is working')
 });
 app.post("/send", async (req, res) => {
