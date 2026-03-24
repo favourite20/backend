@@ -6,17 +6,17 @@ app.use(express.json());
 app.post("/send", async (req, res) => {
   const { Name, Subject, Email, Message } = req.body;
   const contactMail = nodemail.createTransport({
-    host: "smtp.gmail.com",
+    service: "gmail",
     secure: true,
     port: 465,
     auth: {
-      user: process.env.USER,
-      pass: process.env.APP_PASS,
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
   });
 
   const mailOpt = {
-    from: Email,
+    from: process.env.EMAIL_USER,
     to: "favouriteudeh10@gmail.com",
     subject: Subject,
     text: `
@@ -25,12 +25,18 @@ app.post("/send", async (req, res) => {
     Message : ${Message}
     `,
   };
+  try{
   await contactMail.sendMail(mailOpt);
+    res.status(200).send("message sent");
+  }catch(err){
+    console.error(err);
+    res.status(500).send(err.message);
+  }
   res.send(`
     <body>
     <h1>
     Thanks for reaching out to us</h1>
-    <a href="portfolio.html">go back</a>
+    
     </body>
     `);
 });
